@@ -58,3 +58,11 @@ This project is an **Employee Management System** built using Angular as a front
 - RESTful API using .NET Web API or Node.js
 - Entity Framework Core / InMemoryData for ORM
 - Separate database and service layers
+
+Run this Application
+frontend
+- cd frontend then  ng serve --open
+- http://localhost:4200/employees
+backend
+- cd server then dotnet run
+-http://localhost:5108/swagger/index.html
