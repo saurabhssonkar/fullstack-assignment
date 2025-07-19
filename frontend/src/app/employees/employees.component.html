@@ -1,0 +1,57 @@
+<div class="container">
+  <h2 class="title">👩‍💼 Employee Management</h2>
+  <div class="bottom">
+    <button class="btn btn-primary" (click)="openDialog()">➕ Add Employee</button>
+
+
+  </div>
+
+
+
+  <!-- 🔄 Loading spinner -->
+  <div *ngIf="loading" class="text-center">
+    <p>Loading employees...</p>
+    <div class="spinner"></div>
+  </div>
+
+  <!-- 📋 Employee Table -->
+  <div *ngIf="!loading">
+    <!-- Optional search -->
+    <!-- <input
+      type="text"
+      class="search-box"
+      placeholder="Search..."
+      [(ngModel)]="searchTerm"
+      name="search"
+    /> -->
+
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Department</th><th>Email</th><th>Phone</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let emp of employees | search: searchTerm | slice:(currentPage - 1) * itemsPerPage : currentPage * itemsPerPage"
+        >
+          <td>{{ emp.employeeId }}</td>
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.department }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.phoneNumber }}</td>
+          <td>
+         <button class="btn edit-btn" (click)="openDialog(emp)">Edit</button>
+            <button class="btn delete-btn" (click)="deleteEmployee(emp.employeeId)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+</div>
